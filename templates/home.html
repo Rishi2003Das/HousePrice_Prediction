@@ -3,143 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>California House Price Prediction</title>
-    <link href="https://fonts.googleapis.com/css?family=Pacifico|Arimo|Hind:300|Open+Sans+Condensed:300" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>House Price Prediction</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arimo', sans-serif;
-        }
-
         body {
-            background: url('https://source.unsplash.com/1600x900/?house,realestate') no-repeat center center fixed;
+            font-family: Arial, sans-serif;
+            background: url('https://source.unsplash.com/1600x900/?real-estate') no-repeat center center fixed;
             background-size: cover;
-            color: #fff;
-        }
-
-        nav {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px;
             text-align: center;
+            padding-top: 50px;
+            color: white;
         }
-
-        nav a {
-            color: #fff;
-            margin: 0 15px;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
         .container {
-            width: 50%;
-            margin: 50px auto;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
             border-radius: 10px;
-            text-align: center;
+            width: 50%;
+            margin: auto;
         }
-
-        h1 {
-            font-family: 'Pacifico', cursive;
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-
-        .input-group {
-            margin: 10px 0;
-        }
-
         input {
-            width: 100%;
+            width: 90%;
             padding: 10px;
-            margin: 5px 0;
+            margin: 10px;
             border-radius: 5px;
-            border: none;
-            outline: none;
-            font-size: 16px;
         }
-
         button {
-            background: #ff9800;
+            background: #28a745;
             color: white;
             padding: 10px;
             border: none;
-            width: 100%;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 18px;
-            margin-top: 10px;
-            transition: 0.3s;
         }
-
         button:hover {
-            background: #e68900;
+            background: #218838;
         }
-
-        .footer {
-            text-align: center;
-            padding: 10px;
+        .logout-btn {
+            background: red;
             position: absolute;
-            bottom: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.7);
-        }
-
-        .footer p {
-            color: white;
+            top: 10px;
+            right: 20px;
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-    </nav>
+    <a href="{{ url_for('logout') }}"><button class="logout-btn">Logout</button></a>
 
     <div class="container">
         <h1>California House Price Prediction</h1>
-        <p>Enter the required details to estimate the price of a house in California.</p>
+        <p>Enter details below to predict house price:</p>
 
-        <form action="{{ url_for('predict')}}" method="post">
-            <div class="input-group">
-                <input type="text" name="MedInc" placeholder="Median Income" required>
-            </div>
-            <div class="input-group">
-                <input type="text" name="HouseAge" placeholder="House Age" required>
-            </div>
-            <div class="input-group">
-                <input type="text" name="AveRooms" placeholder="Average Rooms" required>
-            </div>
-            <div class="input-group">
-                <input type="text" name="AveBedrms" placeholder="Average Bedrooms" required>
-            </div>
-            <div class="input-group">
-                <input type="text" name="Population" placeholder="Population" required>
-            </div>
-            <div class="input-group">
-                <input type="text" name="AveOccup" placeholder="Average Occupancy" required>
-            </div>
-            <div class="input-group">
-                <input type="text" name="Latitude" placeholder="Latitude" required>
-            </div>
-            <div class="input-group">
-                <input type="text" name="Longitude" placeholder="Longitude" required>
-            </div>
+        <form action="{{ url_for('predict') }}" method="post">
+            <input type="text" name="MedInc" placeholder="Median Income" required><br>
+            <input type="text" name="HouseAge" placeholder="House Age" required><br>
+            <input type="text" name="AveRooms" placeholder="Average Rooms" required><br>
+            <input type="text" name="AveBedrms" placeholder="Average Bedrooms" required><br>
+            <input type="text" name="Population" placeholder="Population" required><br>
+            <input type="text" name="AveOccup" placeholder="Average Occupancy" required><br>
+            <input type="text" name="Latitude" placeholder="Latitude" required><br>
+            <input type="text" name="Longitude" placeholder="Longitude" required><br>
             <button type="submit">Predict</button>
         </form>
 
-        <br>
+        {% if prediction_text %}
         <h2>{{ prediction_text }}</h2>
-    </div>
-
-    <div class="footer">
-        <p>© 2025 House Price Prediction | Designed for Real Estate Analysis</p>
+        {% endif %}
     </div>
 
 </body>
