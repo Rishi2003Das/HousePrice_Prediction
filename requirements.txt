@@ -4,5 +4,3 @@ numpy
 pandas
 scikit-learn
 seaborn
-pytorch
-torchvision
