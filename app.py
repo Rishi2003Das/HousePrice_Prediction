@@ -4,11 +4,23 @@ import numpy as np
 import pandas as pd
 from flask import Flask, request, jsonify, render_template, redirect, url_for, session
 
+# Add this at the start of your app.py for more detailed error tracking
+import traceback
+import sys
+
+try:
+    import numpy as np
+    print("NumPy Version:", np.__version__)
+except Exception as e:
+    print("Detailed NumPy Import Error:")
+    traceback.print_exc()
+    sys.exit(1)
+
 app = Flask(__name__)
 app.secret_key = "supersecretkey"  # Secret key for session management
 
 # Load the model and scaler
-regmodel = pickle.load(open('regmodel.pkl', 'rb'))
+regmodel = pickle.load(open('regmodel.pkl', 'rb'), encoding='latin1')
 scalar = pickle.load(open('scaling.pkl', 'rb'))
 
 # Hardcoded login credentials (for demo purposes)
